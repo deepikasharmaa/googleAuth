@@ -1,0 +1,28 @@
+<div class="dashboard-container">
+    @if (user) {
+    <h2>Welcome, {{ user.name }}</h2>
+    <img [src]="user.picture" alt="profile" />
+    <p>{{ user.email }}</p>
+    <button (click)="logout()">Logout</button>
+    }
+
+    <hr />
+
+    <h3>🌤️ City Weather Updates</h3>
+
+    @if (loading) {
+    <div><img src="https://cdn.pixabay.com/animation/2025/05/01/16/51/16-51-30-473_512.gif"></div>
+    } @else {
+    <div class="weather-grid">
+        @for (city of weatherData; track city.name) {
+        <div class="city-card">
+            <h4>{{ city.name }}</h4>
+            <img [src]="'https://openweathermap.org/img/wn/' + city.weather[0].icon + '@2x.png'" alt="Weather Icon" />
+            <p>{{ city.weather[0].main }} - {{ city.weather[0].description }}</p>
+            <p>🌡️ {{ city.main.temp }}°C</p>
+            <p>💨 {{ city.wind.speed }} m/s</p>
+        </div>
+        }
+    </div>
+    }
+</div>
